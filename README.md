@@ -1,0 +1,1 @@
+Just some course contents for .NET core and React..

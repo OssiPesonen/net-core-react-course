@@ -1,0 +1,15 @@
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\bin\Debug\net6.0\Persistence.deps.json
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\bin\Debug\net6.0\Persistence.dll
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\bin\Debug\net6.0\Persistence.pdb
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\bin\Debug\net6.0\Domain.dll
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\bin\Debug\net6.0\Domain.pdb
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\Persistence.csproj.AssemblyReference.cache
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\Persistence.AssemblyInfoInputs.cache
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\Persistence.AssemblyInfo.cs
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\Persistence.csproj.CoreCompileInputs.cache
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\Persistence.csproj.CopyComplete
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\Persistence.dll
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\refint\Persistence.dll
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\Persistence.pdb
+G:\Dropbox\Dev\dotnet\Reactivities\Persistence\obj\Debug\net6.0\ref\Persistence.dll
