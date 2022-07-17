@@ -2,12 +2,16 @@ import { Stack, Flex, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/assets/images/logo.png';
+import { useStore } from '@/stores/store';
 
-interface NavBarProps {
-  onClickAddActivity: () => void;
-}
+export default function NavBar () {
+  const { activityStore } = useStore();
 
-export default function NavBar ({ onClickAddActivity }: NavBarProps) {
+  const handleAddActivity = () => {
+    activityStore.setSelectedActivity(undefined);
+    activityStore.setEdit(true);
+  }
+  
   return (
     <div id="top">
       <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" mb={8} p={8}>
@@ -19,7 +23,7 @@ export default function NavBar ({ onClickAddActivity }: NavBarProps) {
           <Link href="/"><a>Activities</a></Link>
         </Stack>
         <Stack>
-          <Button variant="outline" colorScheme="white" onClick={onClickAddActivity}>
+          <Button variant="outline" colorScheme="white" onClick={handleAddActivity}>
             Create activity
           </Button>
         </Stack>

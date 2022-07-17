@@ -1,17 +1,32 @@
-import React from 'react';
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Textarea } from '@chakra-ui/react';
-import { Activity } from '@/models/activity';
+import React, { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
-import agent from '@/assets/api-agent';
+import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Textarea } from '@chakra-ui/react';
+import { RequestStatus, useStore } from '@/stores/store';
+import { Activity } from '@/models/activity';
+import { toast } from 'react-toastify';
 
-interface ActivityFormProps {
-  activity?: Activity;
-  onCancel?: () => void;
-}
+const ActivityForm = () => {
+  const { activityStore } = useStore();
+  const activity = activityStore.selectedActivity;
 
-export default function ActivityForm({ onCancel, activity }: ActivityFormProps) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (activityStore.requestStatus.edit === 'complete') {
+      toast.success('Successfully updated activity');
+      activityStore.setRequestStatus('edit', RequestStatus.NOTSTARTED);
+    }
+
+    if (activityStore.requestStatus.create === 'complete') {
+      toast.success('Successfully added activity');
+      activityStore.setRequestStatus('create', RequestStatus.NOTSTARTED);
+    }
+  }, [activityStore.requestStatus.edit, activityStore.requestStatus.create]);
+
+  const handleCancelEdit = () => {
+    activityStore.setEdit(false);
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
@@ -27,13 +42,10 @@ export default function ActivityForm({ onCancel, activity }: ActivityFormProps) 
     };
 
     if (activity?.id) {
-      agent.Activities.update(data).then(() => {
-        console.log('Updated activity successfully');
-      });
+      data.id = activity.id;
+      await activityStore.editActivity(data);
     } else {
-      agent.Activities.create(data).then(() => {
-        console.log('Added activity successfully');
-      });
+      await activityStore.createActivity(data);
     }
   }
 
@@ -73,10 +85,27 @@ export default function ActivityForm({ onCancel, activity }: ActivityFormProps) 
           <Input id='venue' type='text' name='venue' defaultValue={ activity?.venue }/>
         </FormControl>
         <Flex mt={ 4 } gap={ 4 }>
-          { onCancel && <Button w="full" variant="outline" type="button" onClick={ onCancel }>Cancel</Button> }
-          <Button w="full" type="submit" colorScheme="teal">Submit</Button>
+          <Button
+            w="full"
+            variant="outline"
+            type="button"
+            onClick={ handleCancelEdit }
+            disabled={ activityStore.requestStatus.create === 'pending' || activityStore.requestStatus.edit === 'pending' }
+          >
+            Cancel
+          </Button>
+          <Button
+            w="full"
+            type="submit"
+            colorScheme="teal"
+            isLoading={ activityStore.requestStatus.create === 'pending' || activityStore.requestStatus.edit === 'pending' }
+          >
+            Submit
+          </Button>
         </Flex>
       </form>
     </Box>
   );
 }
+
+export default observer(ActivityForm);
