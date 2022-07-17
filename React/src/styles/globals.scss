@@ -1,0 +1,38 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#top {
+  background: #101010;
+  color: #FFF;
+
+  a {
+    color: #FFF;
+    font-weight: 500;
+    transition: .22s ease-in-out;
+
+    &:hover {
+      color: #ddd;
+    }
+  }
+}
+
+#logo {
+  img {
+    max-width: 200px !important;
+    height: auto;
+  }
+}
