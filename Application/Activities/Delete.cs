@@ -34,8 +34,10 @@ namespace Application.Activities
                 }
                 
                 _context.Remove(activity);
-                _context.SaveChangesAsync();
-                return Result<Unit>.Success(Unit.Value);
+
+                var result = await _context.SaveChangesAsync() > 0;
+                
+                return result ? Result<Unit>.Success(Unit.Value) : Result<Unit>.Failure("Failed to delete the activity");
             }
         }
     }
