@@ -7,21 +7,22 @@ namespace API.Controllers
     public class ActivitiesController : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Activity>>> GetActivities()
+        public async Task<IActionResult> GetActivities()
         {
-            return await Mediator.Send(new List.Query());
+            return HandleResult(await Mediator.Send(new List.Query()));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Activity>> GetActivity(Guid id)
+        public async Task<IActionResult> GetActivity(Guid id)
         {
-            return Ok(await Mediator.Send(new Read.Query { Id = id }));
+            return HandleResult(await Mediator.Send(new Read.Query { Id = id }));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateActivity(Activity activity)
         {
-            return Ok(await Mediator.Send(new Create.Command { Activity = activity }));
+            var uri = new Uri($"api/activities/{activity.Id}", UriKind.RelativeOrAbsolute);
+            return HandleResult(await Mediator.Send(new Create.Command { Activity = activity }), uri);
         }
 
         [HttpPut("{id}")]
